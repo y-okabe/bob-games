@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Game Arcade - ゲームセレクト</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <header class="arcade-header">
+            <h1 class="arcade-title">
+                <span class="title-line">RETRO GAME</span>
+                <span class="title-line arcade">ARCADE</span>
+            </h1>
+            <p class="arcade-subtitle">SELECT YOUR GAME</p>
+        </header>
+
+        <main class="game-selection">
+            <div class="game-card" data-game="invader">
+                <div class="game-card-inner">
+                    <div class="game-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Space Invader Icon -->
+                            <rect x="20" y="30" width="10" height="10" fill="currentColor"/>
+                            <rect x="70" y="30" width="10" height="10" fill="currentColor"/>
+                            <rect x="30" y="40" width="40" height="10" fill="currentColor"/>
+                            <rect x="20" y="50" width="10" height="10" fill="currentColor"/>
+                            <rect x="30" y="50" width="10" height="10" fill="currentColor"/>
+                            <rect x="60" y="50" width="10" height="10" fill="currentColor"/>
+                            <rect x="70" y="50" width="10" height="10" fill="currentColor"/>
+                            <rect x="40" y="60" width="20" height="10" fill="currentColor"/>
+                            <rect x="30" y="70" width="10" height="10" fill="currentColor"/>
+                            <rect x="60" y="70" width="10" height="10" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h2 class="game-title">SPACE INVADERS</h2>
+                    <p class="game-description">クラシックなシューティングゲーム。侵略者を撃退せよ！</p>
+                    <div class="game-stats">
+                        <span class="stat">🎮 アクション</span>
+                        <span class="stat">⭐ 難易度: ★★★☆☆</span>
+                    </div>
+                    <button class="play-button" onclick="location.href='invader/index.html'">
+                        <span class="button-text">PLAY NOW</span>
+                        <span class="button-arrow">▶</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="game-card" data-game="tetris">
+                <div class="game-card-inner">
+                    <div class="game-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Tetris Block Icon -->
+                            <rect x="30" y="20" width="15" height="15" fill="currentColor"/>
+                            <rect x="30" y="35" width="15" height="15" fill="currentColor"/>
+                            <rect x="30" y="50" width="15" height="15" fill="currentColor"/>
+                            <rect x="45" y="50" width="15" height="15" fill="currentColor"/>
+                            <rect x="55" y="35" width="15" height="15" fill="currentColor"/>
+                            <rect x="55" y="50" width="15" height="15" fill="currentColor"/>
+                            <rect x="55" y="65" width="15" height="15" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <h2 class="game-title">RETRO TETRIS</h2>
+                    <p class="game-description">落ちてくるブロックを揃えて消す、永遠の名作パズル！</p>
+                    <div class="game-stats">
+                        <span class="stat">🧩 パズル</span>
+                        <span class="stat">⭐ 難易度: ★★★★☆</span>
+                    </div>
+                    <button class="play-button" onclick="location.href='retro-tetris/index.html'">
+                        <span class="button-text">PLAY NOW</span>
+                        <span class="button-arrow">▶</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="game-card coming-soon">
+                <div class="game-card-inner">
+                    <div class="game-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Question Mark Icon -->
+                            <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" stroke-width="4"/>
+                            <text x="50" y="65" font-size="50" text-anchor="middle" fill="currentColor">?</text>
+                        </svg>
+                    </div>
+                    <h2 class="game-title">COMING SOON</h2>
+                    <p class="game-description">新しいゲームを開発中です。お楽しみに！</p>
+                    <div class="game-stats">
+                        <span class="stat">🚀 開発中</span>
+                        <span class="stat">⭐ 難易度: ???</span>
+                    </div>
+                    <button class="play-button" disabled>
+                        <span class="button-text">COMING SOON</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="arcade-footer">
+            <div class="footer-content">
+                <p class="copyright">&copy; 2025 Yuta Okabe - Retro Game Collection</p>
+                <p class="credits">Made with ❤️ for classic gaming enthusiasts</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

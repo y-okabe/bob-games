@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders - フル機能版</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+    <!-- スタート画面 -->
+    <div id="startScreen" class="screen active">
+        <div class="screen-content">
+            <h1 class="game-title">SPACE INVADERS</h1>
+            <div class="menu-buttons">
+                <button id="startButton" class="menu-btn primary">ゲームスタート</button>
+                <button id="difficultyButton" class="menu-btn">難易度設定</button>
+                <button id="themeButton" class="menu-btn">テーマ変更</button>
+                <button id="instructionsButton" class="menu-btn">操作方法</button>
+                <button id="backToArcade" class="menu-btn secondary" onclick="location.href='../index.html'">🏠 メインメニューへ</button>
+            </div>
+            <div class="high-score-display">
+                <p>ハイスコア: <span id="highScoreDisplay">0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 難易度選択画面 -->
+    <div id="difficultyScreen" class="screen">
+        <div class="screen-content">
+            <h2>難易度を選択</h2>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn" data-difficulty="easy">
+                    <span class="difficulty-name">EASY</span>
+                    <span class="difficulty-desc">初心者向け</span>
+                </button>
+                <button class="difficulty-btn" data-difficulty="normal">
+                    <span class="difficulty-name">NORMAL</span>
+                    <span class="difficulty-desc">標準</span>
+                </button>
+                <button class="difficulty-btn" data-difficulty="hard">
+                    <span class="difficulty-name">HARD</span>
+                    <span class="difficulty-desc">上級者向け</span>
+                </button>
+            </div>
+            <button id="backFromDifficulty" class="menu-btn secondary">戻る</button>
+        </div>
+    </div>
+
+    <!-- テーマ選択画面 -->
+    <div id="themeScreen" class="screen">
+        <div class="screen-content">
+            <h2>テーマを選択</h2>
+            <div class="theme-buttons">
+                <button class="theme-btn" data-theme="retro">
+                    <span class="theme-name">RETRO</span>
+                    <span class="theme-desc">クラシック</span>
+                </button>
+                <button class="theme-btn" data-theme="modern">
+                    <span class="theme-name">MODERN</span>
+                    <span class="theme-desc">モダン</span>
+                </button>
+                <button class="theme-btn" data-theme="neon">
+                    <span class="theme-name">NEON</span>
+                    <span class="theme-desc">ネオン</span>
+                </button>
+            </div>
+            <button id="backFromTheme" class="menu-btn secondary">戻る</button>
+        </div>
+    </div>
+
+    <!-- 操作方法画面 -->
+    <div id="instructionsScreen" class="screen">
+        <div class="screen-content">
+            <h2>操作方法</h2>
+            <div class="instructions">
+                <div class="instruction-item">
+                    <span class="key">← →</span>
+                    <span class="action">移動</span>
+                </div>
+                <div class="instruction-item">
+                    <span class="key">SPACE</span>
+                    <span class="action">射撃</span>
+                </div>
+                <div class="instruction-item">
+                    <span class="key">ESC</span>
+                    <span class="action">一時停止</span>
+                </div>
+                <div class="instruction-item">
+                    <span class="key">P</span>
+                    <span class="action">一時停止</span>
+                </div>
+            </div>
+            <h3>パワーアップ</h3>
+            <div class="powerup-info">
+                <div class="powerup-item">
+                    <span class="powerup-icon rapid">R</span>
+                    <span class="powerup-name">連射</span>
+                </div>
+                <div class="powerup-item">
+                    <span class="powerup-icon shield">S</span>
+                    <span class="powerup-name">シールド</span>
+                </div>
+                <div class="powerup-item">
+                    <span class="powerup-icon boost">B</span>
+                    <span class="powerup-name">スコアブースト</span>
+                </div>
+                <div class="powerup-item">
+                    <span class="powerup-icon wide">W</span>
+                    <span class="powerup-name">ワイドショット</span>
+                </div>
+            </div>
+            <button id="backFromInstructions" class="menu-btn secondary">戻る</button>
+        </div>
+    </div>
+
+    <!-- ゲーム画面 -->
+    <div id="gameScreen" class="screen">
+        <!-- ゲーム情報表示 -->
+        <div id="gameInfo">
+            <div class="info-left">
+                <div class="info-item">
+                    <span class="info-label">スコア:</span>
+                    <span id="scoreDisplay" class="info-value">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">ハイスコア:</span>
+                    <span id="gameHighScore" class="info-value">0</span>
+                </div>
+            </div>
+            <div class="info-center">
+                <div class="info-item">
+                    <span class="info-label">レベル:</span>
+                    <span id="levelDisplay" class="info-value">1</span>
+                </div>
+            </div>
+            <div class="info-right">
+                <div class="info-item">
+                    <span class="info-label">ライフ:</span>
+                    <span id="livesDisplay" class="info-value">❤❤❤</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- パワーアップ表示 -->
+        <div id="powerupDisplay"></div>
+
+        <!-- ゲームキャンバス -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- 一時停止オーバーレイ -->
+        <div id="pauseOverlay" class="overlay">
+            <div class="overlay-content">
+                <h2>一時停止</h2>
+                <button id="resumeButton" class="menu-btn primary">再開</button>
+                <button id="quitButton" class="menu-btn secondary">タイトルへ戻る</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ゲームオーバー画面 -->
+    <div id="gameOverScreen" class="screen">
+        <div class="screen-content">
+            <h1 class="game-over-title">GAME OVER</h1>
+            <div class="final-stats">
+                <p>最終スコア: <span id="finalScore">0</span></p>
+                <p>到達レベル: <span id="finalLevel">1</span></p>
+                <p id="newHighScore" class="new-high-score" style="display: none;">🎉 新記録！ 🎉</p>
+            </div>
+            <div class="menu-buttons">
+                <button id="retryButton" class="menu-btn primary">リトライ</button>
+                <button id="backToMenuButton" class="menu-btn secondary">タイトルへ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ゲームクリア画面 -->
+    <div id="gameClearScreen" class="screen">
+        <div class="screen-content">
+            <h1 class="game-clear-title">GAME CLEAR!</h1>
+            <div class="final-stats">
+                <p>最終スコア: <span id="clearScore">0</span></p>
+                <p>クリアレベル: <span id="clearLevel">10</span></p>
+                <p id="clearNewHighScore" class="new-high-score" style="display: none;">🎉 新記録！ 🎉</p>
+            </div>
+            <div class="menu-buttons">
+                <button id="playAgainButton" class="menu-btn primary">もう一度プレイ</button>
+                <button id="backToMenuFromClear" class="menu-btn secondary">タイトルへ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- レベルクリア通知 -->
+    <div id="levelClearNotification" class="notification">
+        <h2>LEVEL CLEAR!</h2>
+        <p>次のレベルへ...</p>
+    </div>
+
+    <!-- JavaScriptファイルの読み込み -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/bullet.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/powerup.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

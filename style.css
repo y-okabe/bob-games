@@ -1,0 +1,485 @@
+/* ===== リセットとベース設定 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #00ff41;
+    --secondary-color: #ff00ff;
+    --accent-color: #00ffff;
+    --bg-dark: #0a0e27;
+    --bg-darker: #050810;
+    --text-light: #ffffff;
+    --text-glow: #00ff41;
+    --card-bg: rgba(20, 25, 45, 0.8);
+    --card-border: rgba(0, 255, 65, 0.3);
+    --shadow-glow: 0 0 20px rgba(0, 255, 65, 0.5);
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: var(--bg-darker);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ===== 星空背景アニメーション ===== */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.stars::before,
+.stars::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    box-shadow: 
+        100px 200px white, 300px 100px white, 500px 300px white,
+        700px 150px white, 200px 400px white, 600px 250px white,
+        150px 500px white, 450px 450px white, 800px 400px white,
+        250px 150px white, 550px 200px white, 350px 350px white,
+        650px 100px white, 750px 500px white, 50px 300px white,
+        900px 200px white, 400px 50px white, 850px 350px white,
+        950px 450px white, 100px 100px white, 500px 500px white,
+        300px 250px white, 700px 350px white, 200px 200px white;
+    animation: twinkle 3s infinite;
+}
+
+.stars::after {
+    animation-delay: 1.5s;
+    opacity: 0.5;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* ===== コンテナ ===== */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== ヘッダー ===== */
+.arcade-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeInDown 1s ease-out;
+}
+
+.arcade-title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.title-line {
+    display: block;
+    text-shadow: 
+        0 0 10px var(--text-glow),
+        0 0 20px var(--text-glow),
+        0 0 30px var(--text-glow);
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+.title-line.arcade {
+    color: var(--secondary-color);
+    text-shadow: 
+        0 0 10px var(--secondary-color),
+        0 0 20px var(--secondary-color),
+        0 0 30px var(--secondary-color);
+    animation-delay: 0.5s;
+}
+
+.arcade-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 0.5rem;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes neonPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes blink {
+    0%, 49%, 100% { opacity: 1; }
+    50%, 99% { opacity: 0.3; }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== ゲーム選択エリア ===== */
+.game-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex: 1;
+}
+
+/* ===== ゲームカード ===== */
+.game-card {
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out;
+    animation-fill-mode: both;
+}
+
+.game-card:nth-child(1) { animation-delay: 0.2s; }
+.game-card:nth-child(2) { animation-delay: 0.4s; }
+.game-card:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.game-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-glow);
+}
+
+.game-card:hover::before {
+    opacity: 0.3;
+}
+
+.game-card.coming-soon {
+    opacity: 0.6;
+}
+
+.game-card.coming-soon:hover {
+    transform: translateY(-5px) scale(1.01);
+}
+
+.game-card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* ===== ゲームアイコン ===== */
+.game-icon {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.game-card:nth-child(2) .game-icon {
+    color: var(--secondary-color);
+}
+
+.game-card:nth-child(3) .game-icon {
+    color: var(--accent-color);
+}
+
+.game-card:hover .game-icon {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 15px currentColor);
+}
+
+.game-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== ゲームタイトルと説明 ===== */
+.game-title {
+    font-size: 1.8rem;
+    text-align: center;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    letter-spacing: 0.1rem;
+}
+
+.game-card:nth-child(2) .game-title {
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px var(--secondary-color);
+}
+
+.game-card:nth-child(3) .game-title {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+.game-description {
+    text-align: center;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+/* ===== ゲーム統計 ===== */
+.game-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.stat {
+    display: block;
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== プレイボタン ===== */
+.play-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.game-card:nth-child(2) .play-button {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+}
+
+.play-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.play-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.play-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px currentColor;
+}
+
+.play-button:active {
+    transform: scale(0.98);
+}
+
+.play-button:disabled {
+    background: rgba(100, 100, 100, 0.5);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.play-button:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.button-text,
+.button-arrow {
+    position: relative;
+    z-index: 1;
+}
+
+.button-arrow {
+    font-size: 1.5rem;
+    animation: arrowBounce 1s infinite;
+}
+
+@keyframes arrowBounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+/* ===== フッター ===== */
+.arcade-footer {
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 2px solid var(--card-border);
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.copyright,
+.credits {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.credits {
+    font-size: 0.8rem;
+}
+
+/* ===== レスポンシブデザイン ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .arcade-title {
+        font-size: 2.5rem;
+    }
+
+    .arcade-subtitle {
+        font-size: 1rem;
+        letter-spacing: 0.3rem;
+    }
+
+    .game-selection {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .game-card {
+        padding: 1.5rem;
+    }
+
+    .game-icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .game-title {
+        font-size: 1.5rem;
+    }
+
+    .play-button {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .arcade-title {
+        font-size: 2rem;
+    }
+
+    .arcade-subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 0.2rem;
+    }
+
+    .game-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .game-title {
+        font-size: 1.3rem;
+    }
+
+    .game-description {
+        font-size: 0.85rem;
+    }
+}
+
+/* ===== アクセシビリティ ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== プリント用スタイル ===== */
+@media print {
+    .stars {
+        display: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .game-card {
+        break-inside: avoid;
+        border: 2px solid black;
+    }
+}

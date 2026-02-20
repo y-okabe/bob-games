@@ -1,0 +1,248 @@
+/* ===== テーマシステム ===== */
+
+/* デフォルト（レトロ）テーマ */
+:root,
+[data-theme="retro"] {
+    --primary-color: #00ff00;
+    --secondary-color: #00cc00;
+    --accent-color: #00ff00;
+    --background-color: #000000;
+    --text-color: #00ff00;
+    --enemy-color: #ff0000;
+    --player-color: #00ff00;
+    --bullet-color: #ffff00;
+    --powerup-rapid-color: #ff6600;
+    --powerup-shield-color: #00ccff;
+    --powerup-boost-color: #ffff00;
+    --powerup-wide-color: #ff00ff;
+}
+
+body {
+    color: var(--text-color);
+}
+
+.menu-btn,
+.difficulty-btn,
+.theme-btn,
+.instruction-item,
+.powerup-item,
+.key,
+.powerup-icon,
+#gameInfo,
+#gameCanvas,
+.overlay,
+.notification {
+    color: var(--text-color);
+    border-color: var(--primary-color);
+}
+
+.game-title,
+h2,
+h3 {
+    color: var(--accent-color);
+}
+
+/* モダンテーマ */
+[data-theme="modern"] {
+    --primary-color: #4a90e2;
+    --secondary-color: #357abd;
+    --accent-color: #5ca3f5;
+    --background-color: #1a1a2e;
+    --text-color: #ffffff;
+    --enemy-color: #e74c3c;
+    --player-color: #3498db;
+    --bullet-color: #f39c12;
+    --powerup-rapid-color: #e67e22;
+    --powerup-shield-color: #1abc9c;
+    --powerup-boost-color: #f1c40f;
+    --powerup-wide-color: #9b59b6;
+}
+
+[data-theme="modern"] body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+[data-theme="modern"] .screen {
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+}
+
+[data-theme="modern"] .menu-btn,
+[data-theme="modern"] .difficulty-btn,
+[data-theme="modern"] .theme-btn {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="modern"] .menu-btn:hover,
+[data-theme="modern"] .difficulty-btn:hover,
+[data-theme="modern"] .theme-btn:hover {
+    box-shadow: 0 6px 12px rgba(74, 144, 226, 0.5);
+}
+
+[data-theme="modern"] #gameCanvas {
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(74, 144, 226, 0.3);
+}
+
+[data-theme="modern"] .instruction-item,
+[data-theme="modern"] .powerup-item {
+    border-radius: 8px;
+    background: rgba(74, 144, 226, 0.1);
+}
+
+[data-theme="modern"] .key,
+[data-theme="modern"] .powerup-icon {
+    border-radius: 5px;
+    background: rgba(74, 144, 226, 0.2);
+}
+
+/* ネオンテーマ */
+[data-theme="neon"] {
+    --primary-color: #ff00ff;
+    --secondary-color: #cc00cc;
+    --accent-color: #ff00ff;
+    --background-color: #0a0a0a;
+    --text-color: #ff00ff;
+    --enemy-color: #00ffff;
+    --player-color: #ff00ff;
+    --bullet-color: #ffff00;
+    --powerup-rapid-color: #ff0066;
+    --powerup-shield-color: #00ffff;
+    --powerup-boost-color: #ffff00;
+    --powerup-wide-color: #ff6600;
+}
+
+[data-theme="neon"] body {
+    background: radial-gradient(circle at center, #1a0a1a 0%, #0a0a0a 100%);
+}
+
+[data-theme="neon"] .screen {
+    background: radial-gradient(circle at center, rgba(26, 10, 26, 0.95) 0%, rgba(10, 10, 10, 0.95) 100%);
+}
+
+[data-theme="neon"] .game-title,
+[data-theme="neon"] h2 {
+    text-shadow: 
+        0 0 10px var(--accent-color),
+        0 0 20px var(--accent-color),
+        0 0 30px var(--accent-color),
+        0 0 40px var(--accent-color);
+    animation: neonPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px var(--accent-color),
+            0 0 20px var(--accent-color),
+            0 0 30px var(--accent-color),
+            0 0 40px var(--accent-color);
+    }
+    50% {
+        text-shadow: 
+            0 0 5px var(--accent-color),
+            0 0 10px var(--accent-color),
+            0 0 15px var(--accent-color),
+            0 0 20px var(--accent-color);
+    }
+}
+
+[data-theme="neon"] .menu-btn,
+[data-theme="neon"] .difficulty-btn,
+[data-theme="neon"] .theme-btn {
+    box-shadow: 
+        0 0 10px var(--primary-color),
+        inset 0 0 10px rgba(255, 0, 255, 0.2);
+}
+
+[data-theme="neon"] .menu-btn:hover,
+[data-theme="neon"] .difficulty-btn:hover,
+[data-theme="neon"] .theme-btn:hover {
+    box-shadow: 
+        0 0 20px var(--primary-color),
+        0 0 30px var(--primary-color),
+        inset 0 0 20px rgba(255, 0, 255, 0.4);
+}
+
+[data-theme="neon"] #gameCanvas {
+    box-shadow: 
+        0 0 20px var(--primary-color),
+        0 0 40px var(--primary-color),
+        0 0 60px var(--primary-color);
+}
+
+[data-theme="neon"] .instruction-item,
+[data-theme="neon"] .powerup-item {
+    background: rgba(255, 0, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+[data-theme="neon"] .key,
+[data-theme="neon"] .powerup-icon {
+    background: rgba(255, 0, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+[data-theme="neon"] #gameInfo {
+    background: rgba(10, 10, 10, 0.9);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+}
+
+/* パワーアップ固有の色 */
+.powerup-icon.rapid {
+    color: var(--powerup-rapid-color);
+    border-color: var(--powerup-rapid-color);
+}
+
+.powerup-icon.shield {
+    color: var(--powerup-shield-color);
+    border-color: var(--powerup-shield-color);
+}
+
+.powerup-icon.boost {
+    color: var(--powerup-boost-color);
+    border-color: var(--powerup-boost-color);
+}
+
+.powerup-icon.wide {
+    color: var(--powerup-wide-color);
+    border-color: var(--powerup-wide-color);
+}
+
+.active-powerup.rapid {
+    border-color: var(--powerup-rapid-color);
+    color: var(--powerup-rapid-color);
+}
+
+.active-powerup.shield {
+    border-color: var(--powerup-shield-color);
+    color: var(--powerup-shield-color);
+}
+
+.active-powerup.boost {
+    border-color: var(--powerup-boost-color);
+    color: var(--powerup-boost-color);
+}
+
+.active-powerup.wide {
+    border-color: var(--powerup-wide-color);
+    color: var(--powerup-wide-color);
+}
+
+/* テーマボタンのプレビュー */
+[data-theme="retro"] .theme-btn[data-theme="retro"],
+[data-theme="modern"] .theme-btn[data-theme="modern"],
+[data-theme="neon"] .theme-btn[data-theme="neon"] {
+    background: var(--primary-color);
+    color: var(--background-color);
+}
+
+/* テーマ切り替えアニメーション */
+body,
+.screen,
+.menu-btn,
+.difficulty-btn,
+.theme-btn,
+#gameCanvas {
+    transition: all 0.3s ease;
+}
